@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { AiOutlineClose } from "react-icons/ai";
+import Form from "./components/Form";
+import CreditCard from "./components/CreditCard";
+import CheckOutDetails from "./components/CheckOutDetails";
 
-function App() {
+function App(): JSX.Element {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="md:overflow-hidden bg-left  bg-no-repeat  bg-[url(../public/assets/bg.jpg)]">
+      <div className="wrapper grid grid-cols-12">
+        <div className="close-btn">
+          <AiOutlineClose className="text-xl" />
+        </div>
+        <div className="col-span-12 md:col-span-8">
+          <Form />
+        </div>
+        <div className="col-span-12 md:col-span-4">
+          <div className="checkout">
+            <span className="blu"></span>
+            <CreditCard />
+            <CheckOutDetails />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
