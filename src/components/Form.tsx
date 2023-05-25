@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { MdModeEditOutline } from "react-icons/md";
 import { TbGridDots } from "react-icons/tb";
 import Header from "./Header";
+import { ActionType, FormInitialState } from "../interface";
 
-const Form = () => {
-  // #0077B6 focus
+const Form = (): JSX.Element => {
+  const formInitialState: FormInitialState = {
+    cardNumber: false,
+    CVV: false,
+    expiry1: false,
+    expiry2: false,
+    password: false,
+  };
+  const reducer = (state: FormInitialState, action: ActionType) => {
+    const { type } = action;
+    switch (type) {
+      case "card":
+        return { ...state, cardNumber: !state.cardNumber };
+      case "cvv":
+        return { ...state, CVV: !state.CVV };
+      case "expiry1":
+        return { ...state, expiry1: !state.expiry1 };
+      case "expiry2":
+        return { ...state, expiry2: !state.expiry2 };
+      case "password":
+        return { ...state, password: !state.password };
+      default:
+        return state;
+    }
+  };
+
+  const [inputState, dispatch] = useReducer(reducer, formInitialState);
+
   return (
-    <div className="form">
+    <div data-testid="form" className="form">
       <Header />
-
       <section>
         <form>
           <div className="">
@@ -26,10 +52,18 @@ const Form = () => {
                 <span className="btn-desc text-blue-700">Edit</span>
               </button>
             </div>
-            <div className="flex rounded-lg w-full px-4 justify-between focus:border-blue py-3 space-x-4 mt-6 items-center border ">
+            <div
+              data-testid="card-input-wrapper"
+              className={`${
+                inputState.cardNumber ? "border-[#0077B6]" : ""
+              }  flex  rounded-lg w-full px-4 justify-between py-3 space-x-4 mt-6 items-center border `}
+            >
               <div className="flex space-x-4 w-full">
                 <img src="assets/mc_symbol.svg" alt="" className="h-[1.5em]" />
                 <input
+                  data-testid="card-input"
+                  onFocus={() => dispatch({ type: "card" })}
+                  onBlur={() => dispatch({ type: "card" })}
                   type="text"
                   placeholder="2412   -   7512   -   3412   -  3456"
                   className="outline-none w-full"
@@ -50,8 +84,16 @@ const Form = () => {
               </p>
             </div>
 
-            <div className="items-center min-w-full justify-between md:min-w-[230px] py-3 px-[1em] flex border rounded-md">
+            <div
+              data-testid="cvv-input-wrapper"
+              className={` ${
+                inputState.CVV ? "border-[#0077B6]" : ""
+              }    items-center min-w-full justify-between md:min-w-[230px] py-3 px-[1em] flex border rounded-md`}
+            >
               <input
+                data-testid="cvv-input"
+                onFocus={() => dispatch({ type: "cvv" })}
+                onBlur={() => dispatch({ type: "cvv" })}
                 className="outline-none  text-center"
                 type="text"
                 placeholder="327"
@@ -71,16 +113,32 @@ const Form = () => {
             </div>
 
             <div className="flex space-x-2 max-w-full md:max-w-[230px]">
-              <div className="border py-3 flex justify-center items-center  px-[1em] rounded-lg">
+              <div
+                data-testid="expiry1-input-wrapper"
+                className={` ${
+                  inputState.expiry1 ? "border-[#0077B6]" : ""
+                }  border py-3 flex justify-center items-center  px-[1em] rounded-lg`}
+              >
                 <input
+                  data-testid="expiry1-input"
+                  onFocus={() => dispatch({ type: "expiry1" })}
+                  onBlur={() => dispatch({ type: "expiry1" })}
                   className="text-center outline-none w-1/2"
                   type="text"
                   placeholder="09"
                 />
               </div>
               <span className="text-2xl font-bold mt-3 ">/</span>
-              <div className="border flex justify-center items-center rounded-lg py-3 px-[1em]">
+              <div
+                data-testid="expiry2-input-wrapper"
+                className={`${
+                  inputState.expiry2 ? "border-[#0077B6]" : ""
+                }  border flex justify-center items-center rounded-lg py-3 px-[1em] `}
+              >
                 <input
+                  data-testid="expiry2-input"
+                  onFocus={() => dispatch({ type: "expiry2" })}
+                  onBlur={() => dispatch({ type: "expiry2" })}
                   className="text-center outline-none w-1/2"
                   type="text"
                   placeholder="22"
@@ -99,8 +157,16 @@ const Form = () => {
               </p>
             </div>
 
-            <div className="items-center min-w-full justify-between md:min-w-[230px] py-3 px-[1em] flex border rounded-md">
+            <div
+              data-testid="password-input-wrapper"
+              className={`${
+                inputState.password ? "border-[#0077B6]" : ""
+              }  items-center min-w-full justify-between md:min-w-[230px] py-3 px-[1em] flex border rounded-md`}
+            >
               <input
+                data-testid="password-input"
+                onFocus={() => dispatch({ type: "password" })}
+                onBlur={() => dispatch({ type: "password" })}
                 className="outline-none placeholder:text-6xl text-start"
                 type="text"
                 placeholder="......."

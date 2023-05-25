@@ -2,7 +2,7 @@ import React from "react";
 
 const CreditCard = () => {
   return (
-    <div className="credit-card">
+    <div data-testid="card" className="credit-card">
       <div className="credit-card__head">
         <img src="assets/chip.png" alt="" className="chip" />
         <img src="assets/wifi.png" alt="" className="wifi" />

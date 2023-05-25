@@ -2,7 +2,7 @@ import React from "react";
 
 const CheckOutDetails = () => {
   return (
-    <div className="checkout-details">
+    <div data-testid="checkout" className="checkout-details">
       <div className="purchase-data">
         <div className="data">
           <span className="title">company</span>

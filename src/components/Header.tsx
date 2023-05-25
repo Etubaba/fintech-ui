@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = (): JSX.Element => {
   return (
-    <header className="form-header ">
+    <header data-testid="header" className="form-header ">
       <div className="logo">
         <span className="logo-circle"></span>
         <h1>
