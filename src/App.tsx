@@ -5,9 +5,9 @@ import CheckOutDetails from "./components/CheckOutDetails";
 
 function App(): JSX.Element {
   return (
-    <div className="md:overflow-hidden bg-left  bg-no-repeat  bg-[url(../public/assets/bg.jpg)]">
+    <div className="md:overflow-hidden w-full h-screen px-4 bg-left  bg-no-repeat  md:bg-[url(../public/assets/bg.jpg)]">
       <div className="wrapper grid grid-cols-12">
-        <div className="close-btn">
+        <div className="close-btn mb-4">
           <AiOutlineClose className="text-xl" />
         </div>
         <div className="col-span-12 md:col-span-8">
